@@ -1,0 +1,26 @@
+---
+title: "R Markdown and Leaflet"
+author: "Alexandre Moura"
+date: "3/4/2021"
+output: html_document
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(echo = F)
+```
+
+
+## Show Leaflet map
+
+```{r, eval=T, echo=FALSE, comment=""}
+library (leaflet)
+
+df_cities = data.frame(name = c("Sorocaba","Votorantim","Itu","Piedade","Pilar"),
+                       pop = c(644919,117794,167095,54717,28309), lat = c(-23.5015,
+                       -23.50403, -23.2640, -23.7289, -23.8103), 
+                       lon = c(-47.4526, -47.4446,-47.2997, -47.4336, -47.7239))
+df_cities %>% leaflet () %>%
+    addTiles() %>%
+    addCircles(weight = 5, radius = sqrt(df_cities$pop) * 20)
+
+```
