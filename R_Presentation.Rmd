@@ -1,0 +1,36 @@
+---
+title: "R Presentation"
+author: "Alexandre Moura"
+date: "3/8/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Stock ITSA Graph
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library (quantmod)
+library (plotly)
+library(dplyr)
+
+startdate <- as.Date("2001-01-01")
+enddate <- as.Date("2021-01-01")
+
+itsa  = getSymbols('ITSA4.SA', src = "yahoo", from = startdate, to = enddate , 
+                   auto.assign = F)
+itsa = na.omit(as.data.frame(itsa))
+itsa = itsa[-(1:5),drop=F]
+itsa$date = row.names(itsa)
+colnames(itsa) = c('Close', 'Date')
+#itsa = itsa %>% mutate(action = case_when(Close<9 ~ 'Buy', Close>12 ~ 'Sell', TRUE ~ 'Neutral'))
+
+#itsa$action = as.factor(itsa$action)
+
+plot_ly (itsa, x = itsa$Date, y = itsa$Close, type = 'area')
+
+```
+
