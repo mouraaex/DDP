@@ -3167,8 +3167,12 @@ slide:not(.current) .plotly.html-widget{
 
 <p>Here you can see the R code used to simulated dice rolls and calculate the frequency.</p>
 
-<pre class = 'prettyprint lang-r'>dice = sample(c(1,2,3,4,5,6), size = input$slider1, replace = T)
+<pre class = 'prettyprint lang-r'>dice = sample(c(1,2,3,4,5,6), size = 1000, replace = T)
 table(dice)/length(dice)</pre>
+
+<pre >## dice
+##     1     2     3     4     5     6 
+## 0.157 0.188 0.167 0.147 0.155 0.186</pre>
 
 <p>Nothing more than just these two lines are necessary to run the simulation. The user can choose the number of rolls between 100 and 200.000.</p>
 
